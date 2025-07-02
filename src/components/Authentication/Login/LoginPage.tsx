@@ -80,7 +80,10 @@ const AnimatedText = ({ texts }: { texts: string[] }) => {
   );
 };
 
-const CLIENT_ID = '137734019377-nnq12325retn9n23nfnis326j008u2pm.apps.googleusercontent.com';
+
+const CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '';
+
+// Pense à définir ces variables dans un fichier .env.local à la racine du projet
 
 
 const LoginPage: React.FC = () => {
@@ -96,12 +99,10 @@ const LoginPage: React.FC = () => {
     onSuccess: async (tokenResponse) => {
       try {
         const tokens = await axios.post('https://oauth2.googleapis.com/token', {
-          code: tokenResponse.code,
-          client_id: CLIENT_ID,
-          client_secret: CLIENT_SECRET,
-          redirect_uri: window.location.origin,
-          grant_type: 'authorization_code',
+          
         });
+        console.log(tokens.data);
+        
         const backendResponse = await axios.post('http://localhost:9005/api/google-login', {
           tokenId: tokens.data.id_token
         });
