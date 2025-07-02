@@ -372,20 +372,31 @@ export const Evenements = () => {
 
     // Handle form submission for creating or updating an event
     const handleSubmitEvent = (formDataFromModel: EventFormData): void => {
+        // Debug logs
+        console.log('handleSubmitEvent called with data:', formDataFromModel);
+        toast.success('Fonction handleSubmitEvent appelée');
+        
         // If we get an Event object instead of FormData (shouldn't happen), just return
         if ('id' in formDataFromModel && 'createdBy' in formDataFromModel) {
+            console.log('Received full Event object instead of form data, returning');
+            toast.error('Type de données incorrect reçu');
             return;
         }
         
         // Now TypeScript knows formDataFromModel is FormData
         const submitData = async () => {
+        console.log('submitData async function started');
+        toast.success('Début du traitement asynchrone');
+        
         setIsSubmitting(true);
         const isEditing = editingEvent && editingEvent.id;
         const loadingToastId = toast.loading(
             isEditing ? t('modification_evenement_cours', 'Modification...') : t('creation_evenement_cours', 'Création...')
         );
+        console.log('Toast de chargement affiché avec ID:', loadingToastId);
 
         if (!currentUserId) {
+            console.log('Aucun utilisateur connecté');
             toast.error(
                 t('utilisateur_non_identifie_evenement', 'Utilisateur non identifié. Veuillez vous connecter.'), 
                 { id: loadingToastId }
@@ -393,7 +404,8 @@ export const Evenements = () => {
             setIsSubmitting(false);
             return;
         }
-
+        console.log('Utilisateur identifié:', currentUserId);
+        
         try {
             // Utiliser directement la fonction createEvent du service local
             // Import dynamique pour éviter les problèmes de dépendance circulaire
@@ -629,8 +641,10 @@ if (typedErr.response?.status === 400 && typedErr.response?.data?.data) {
                         isOpen={showEventModal}
                         onClose={handleCloseModal}
                         onSubmit={(data) => {
+                            console.log('onSubmit appelé dans Evenements avec data:', data);
                             if (data instanceof FormData) {
                                 // Convert browser FormData to our EventFormData structure
+                                console.log('Data est une instance de FormData');
                                 const eventData: EventFormData = {
                                     title: data.get('title') as string,
                                     description: data.get('description') as string,
@@ -639,6 +653,10 @@ if (typedErr.response?.status === 400 && typedErr.response?.data?.data) {
                                     location: data.get('location') as string
                                 };
                                 handleSubmitEvent(eventData);
+                            } else {
+                                // Si c'est un objet EventFormData normal
+                                console.log('Data est un objet normal');
+                                handleSubmitEvent(data as EventFormData);
                             }
                         }}
                         eventToEdit={editingEvent}

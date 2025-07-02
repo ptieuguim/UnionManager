@@ -90,6 +90,124 @@ interface Event {
 }
 type FeedItemType = (Publication | Event) & { _uniqueId: string };
 // Données factices
+const fakeEvents: Event[] = [
+  {
+    id: 101,
+    title: "Assemblée Générale des Syndicats",
+    description: "Assemblée annuelle pour discuter des nouveaux droits et des négociations à venir.",
+    location: "Grande Salle Polyvalente",
+    startDate: new Date("2025-09-15T09:00:00"),
+    endDate: new Date("2025-09-15T17:00:00"),
+    author: {
+      name: "Claire Girard",
+      avatar: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=150&h=150&fit=crop",
+    },
+    image: "https://images.unsplash.com/photo-1503676382389-4809596d5290?w=1200&h=600&fit=crop",
+    isUpcoming: true,
+    participants: [
+      { name: "Jean Petit" },
+      { name: "Anna Martin" }
+    ],
+    syndicat: {
+      name: "Syndicat Unifié",
+      coverImage: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&h=400&fit=crop"
+    },
+    _type: "event"
+  },
+  {
+    id: 102,
+    title: "Conférence Nationale sur la Sécurité au Travail",
+    description: "Une journée de conférences et d’ateliers sur la sécurité en milieu professionnel.",
+    location: "Palais des Congrès, Yaoundé",
+    startDate: new Date("2025-10-10T08:30:00"),
+    endDate: new Date("2025-10-10T17:00:00"),
+    author: {
+      name: "Olivier Blanchard",
+      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop",
+    },
+    image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?w=1200&h=600&fit=crop",
+    isUpcoming: true,
+    participants: [
+      { name: "Sandrine Durand" },
+      { name: "Valérie Rousseau" }
+    ],
+    syndicat: {
+      name: "Syndicat des Travailleurs du Numérique",
+      coverImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&h=400&fit=crop"
+    },
+    _type: "event"
+  },
+  {
+    id: 103,
+    title: "Grande Manifestation pour les Droits Sociaux",
+    description: "Rassemblement pour défendre les acquis sociaux et demander de meilleures conditions de travail.",
+    location: "Place de l’Indépendance",
+    startDate: new Date("2025-11-01T14:00:00"),
+    endDate: new Date("2025-11-01T18:00:00"),
+    author: {
+      name: "Fatou Ndiaye",
+      avatar: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150&h=150&fit=crop",
+    },
+    image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?w=1200&h=600&fit=crop",
+    isUpcoming: true,
+    participants: [
+      { name: "Bernard Dubois" },
+      { name: "Christine Morel" }
+    ],
+    syndicat: {
+      name: "Fédération des Services Publics",
+      coverImage: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&h=400&fit=crop"
+    },
+    _type: "event"
+  },
+  {
+    id: 104,
+    title: "Atelier de Formation sur le Numérique",
+    description: "Session de formation pour améliorer les compétences numériques des adhérents.",
+    location: "Centre de Formation, Douala",
+    startDate: new Date("2025-10-20T09:00:00"),
+    endDate: new Date("2025-10-20T16:00:00"),
+    author: {
+      name: "Pauline Lemoine",
+      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop",
+    },
+    image: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=1200&h=600&fit=crop",
+    isUpcoming: true,
+    participants: [
+      { name: "Éric Lemaire" },
+      { name: "Martine Lefebvre" }
+    ],
+    syndicat: {
+      name: "Syndicat des Travailleurs de l’Industrie",
+      coverImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=400&fit=crop"
+    },
+    _type: "event"
+  },
+  {
+    id: 105,
+    title: "Forum du Transport et Mobilité",
+    description: "Discussions et exposés sur l’avenir du transport urbain et interurbain.",
+    location: "Salle Polyvalente, Gare Centrale",
+    startDate: new Date("2025-12-02T10:00:00"),
+    endDate: new Date("2025-12-02T17:00:00"),
+    author: {
+      name: "Mohamed Ali",
+      avatar: "https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?w=150&h=150&fit=crop",
+    },
+    image: "https://images.unsplash.com/photo-1465101178521-c1a9136a3b41?w=1200&h=600&fit=crop",
+    isUpcoming: true,
+    participants: [
+      { name: "Isabelle Bernard" },
+      { name: "Camille Rousseau" }
+    ],
+    syndicat: {
+      name: "Syndicat National des Transports",
+      coverImage: "https://images.unsplash.com/photo-1473163928189-364b2c4e1135?w=1200&h=400&fit=crop"
+    },
+    _type: "event"
+  }
+];
+
 const fakePublications: Publication[] = [ 
     {
         id: 1,
@@ -491,208 +609,6 @@ const fakePublications: Publication[] = [
 
 
 ];
-const fakeEvents: Event[] = [
-    {
-        id: 1,
-        title: "Assemblée Générale Annuelle",
-        description: "Rejoignez-nous pour notre Assemblée Générale Annuelle où nous discuterons des réalisations de l'année écoulée et planifierons l'avenir de notre syndicat. Votre voix compte !",
-        location: "Salle de conférence principale, 123 Rue du Syndicat",
-        startDate: new Date("2023-06-15T09:00:00"),
-        endDate: new Date("2023-06-15T17:00:00"),
-        author: {
-            name: "Marie Dupont",
-            avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
-        },
-        image: "https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?w=1200&h=600&fit=crop",
-        isUpcoming: true,
-        participants: [
-            { name: "Jean Dupont" },
-            { name: "Marie Curie" },
-            { name: "Pierre Martin" },
-            { name: "Sophie Lefebvre" },
-        ],
-        syndicat: {
-            name: "Syndicat des Travailleurs de l'Industrie",
-            coverImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=400&fit=crop",
-        },
-        _type: "event"
-    },
-    {
-        id: 2,
-        title: "Formation sur les Droits du Travail",
-        description: "Ne manquez pas notre session de formation intensive sur les dernières mises à jour des lois du travail. Un expert juridique sera présent pour répondre à toutes vos questions.",
-        location: "Salle de formation B, 45 Avenue des Travailleurs",
-        startDate: new Date("2023-07-10T14:00:00"),
-        endDate: new Date("2023-07-10T18:00:00"),
-        author: {
-            name: "Pierre Martin",
-            avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop",
-        },
-        image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&h=600&fit=crop",
-        isUpcoming: true,
-        participants: [{ name: "Lucie Moreau" }, { name: "Thomas Bernard" }, { name: "Camille Roux" }],
-        syndicat: {
-            name: "Syndicat de l'Éducation Nationale",
-            coverImage: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1200&h=400&fit=crop",
-        },
-        _type: "event"
-    },
-
-
-        {
-            id: 3,
-            title: "Atelier sur la Négociation Collective",
-            description: "Participez à notre atelier interactif sur les techniques de négociation collective. Apprenez à défendre efficacement les intérêts de vos collègues lors des discussions avec la direction.",
-            location: "Centre de Conférences Étoile, 78 Rue de la République",
-            startDate: new Date("2023-08-15T09:30:00"),
-            endDate: new Date("2023-08-15T17:00:00"),
-            author: {
-                name: "Sophie Dubois",
-                avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop",
-            },
-            image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=1200&h=600&fit=crop",
-            isUpcoming: true,
-            participants: [
-                { name: "Marc Lefevre" },
-                { name: "Julie Rousseau" },
-                { name: "Antoine Dupuis" },
-                { name: "Émilie Bouchard" }
-            ],
-            syndicat: {
-                name: "Syndicat des Travailleurs du Commerce",
-                coverImage: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=1200&h=400&fit=crop",
-            },
-            _type: "event"
-        },
-        {
-            id: 4,
-            title: "Séminaire sur la Santé et la Sécurité au Travail",
-            description: "Un séminaire essentiel pour tous les délégués syndicaux sur les dernières normes de santé et de sécurité au travail. Découvrez comment protéger vos collègues et améliorer les conditions de travail.",
-            location: "Salle Harmonie, 15 Boulevard des Capucines",
-            startDate: new Date("2023-09-05T10:00:00"),
-            endDate: new Date("2023-09-05T16:30:00"),
-            author: {
-                name: "Laurent Mercier",
-                avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop",
-            },
-            image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200&h=600&fit=crop",
-            isUpcoming: true,
-            participants: [
-                { name: "Nathalie Lemoine" },
-                { name: "Philippe Girard" },
-                { name: "Isabelle Fournier" }
-            ],
-            syndicat: {
-                name: "Syndicat de l'Industrie Métallurgique",
-                coverImage: "https://images.unsplash.com/photo-1565098772267-60af42b81ef2?w=1200&h=400&fit=crop",
-            },
-            _type: "event"
-        },
-        {
-            id: 5,
-            title: "Conférence sur l'Égalité Professionnelle",
-            description: "Rejoignez-nous pour une conférence inspirante sur l'égalité professionnelle entre les hommes et les femmes. Des intervenants de renom partageront leurs expériences et stratégies pour promouvoir l'égalité sur le lieu de travail.",
-            location: "Palais des Congrès, 2 Place de la Porte Maillot",
-            startDate: new Date("2023-10-12T13:00:00"),
-            endDate: new Date("2023-10-12T18:00:00"),
-            author: {
-                name: "Marie-Claire Dupont",
-                avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
-            },
-            image: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=1200&h=600&fit=crop",
-            isUpcoming: true,
-            participants: [
-                { name: "François Moreau" },
-                { name: "Céline Petit" },
-                { name: "Alexandre Lambert" },
-                { name: "Aurélie Roux" },
-                { name: "Thierry Martin" }
-            ],
-            syndicat: {
-                name: "Syndicat Interprofessionnel pour l'Égalité",
-                coverImage: "https://images.unsplash.com/photo-1573164713619-24c711fe7878?w=1200&h=400&fit=crop",
-            },
-            _type: "event"
-        },
-        {
-            id: 6,
-            title: "Forum sur la Digitalisation et l'Emploi",
-            description: "Un forum crucial sur l'impact de la digitalisation sur l'emploi. Explorez les défis et les opportunités de l'ère numérique pour les travailleurs et les syndicats.",
-            location: "Centre de Conventions Numérique, 55 Rue de l'Innovation",
-            startDate: new Date("2023-11-08T09:00:00"),
-            endDate: new Date("2023-11-08T17:30:00"),
-            author: {
-                name: "Julien Leclerc",
-                avatar: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=150&h=150&fit=crop",
-            },
-            image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=600&fit=crop",
-            isUpcoming: true,
-            participants: [
-                { name: "Sandrine Durand" },
-                { name: "Olivier Blanchard" },
-                { name: "Valérie Rousseau" },
-                { name: "Éric Lemaire" }
-            ],
-            syndicat: {
-                name: "Syndicat des Travailleurs du Numérique",
-                coverImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&h=400&fit=crop",
-            },
-            _type: "event"
-        },
-        {
-            id: 7,
-            title: "Journée d'Étude sur les Retraites",
-            description: "Une journée d'étude approfondie sur le système des retraites et les réformes en cours. Comprenez les enjeux et préparez-vous à défendre les droits des travailleurs.",
-            location: "Maison des Syndicats, 32 Rue de la Solidarité",
-            startDate: new Date("2023-12-03T08:30:00"),
-            endDate: new Date("2023-12-03T16:00:00"),
-            author: {
-                name: "Gérard Bonnet",
-                avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop",
-            },
-            image: "https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=1200&h=600&fit=crop",
-            isUpcoming: true,
-            participants: [
-                { name: "Martine Lefebvre" },
-                { name: "Bernard Dubois" },
-                { name: "Christine Morel" },
-                { name: "Pascal Renard" },
-                { name: "Sylvie Lambert" }
-            ],
-            syndicat: {
-                name: "Syndicat National des Retraités",
-                coverImage: "https://images.unsplash.com/photo-1574010498550-47bd2d56d962?w=1200&h=400&fit=crop",
-            },
-            _type: "event"
-        },
-        {
-            id: 8,
-            title: "Atelier sur la Gestion du Stress Professionnel",
-            description: "Apprenez des techniques efficaces pour gérer le stress au travail et promouvoir le bien-être de vos collègues. Cet atelier pratique vous donnera des outils concrets pour améliorer la qualité de vie au travail.",
-            location: "Espace Zen, 10 Rue de la Sérénité",
-            startDate: new Date("2024-01-20T14:00:00"),
-            endDate: new Date("2024-01-20T18:00:00"),
-            author: {
-                name: "Claire Dumont",
-                avatar: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=150&h=150&fit=crop",
-            },
-            image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1200&h=600&fit=crop",
-            isUpcoming: true,
-            participants: [
-                { name: "Thomas Leroy" },
-                { name: "Anne Garnier" },
-                { name: "Nicolas Perrin" },
-                { name: "Hélène Bouvier" }
-            ],
-            syndicat: {
-                name: "Syndicat pour le Bien-être au Travail",
-                coverImage: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&h=400&fit=crop",
-            },
-            _type: "event"
-        }
-
-];
-
 const stats = [
     { id: 1, title: "Membres", value: 1200, icon: Users },
     { id: 2, title: "Événements", value: 30, icon: Calendar },

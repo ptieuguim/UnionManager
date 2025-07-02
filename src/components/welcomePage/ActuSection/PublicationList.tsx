@@ -45,13 +45,16 @@ const PublicationCard: React.FC<PublicationCardProps> = ({ publication }) => {
         </div>
       </div>
       <p className="text-gray-700 mb-4">{publication.content}</p>
-      {publication.image && (
-        <img
-          src={publication.image || "/placeholder.svg"}
-          alt="Publication content"
-          className="w-full h-64 object-cover rounded-lg mb-4"
-        />
-      )}
+      <img
+        src={publication.image || "/placeholder.svg"}
+        alt="Publication content"
+        className="w-full h-64 object-cover rounded-lg mb-4"
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          target.onerror = null;
+          target.src = "/placeholder.svg";
+        }}
+      />
       <div className="flex justify-between text-sm text-gray-500">
         <span className="flex items-center">
           <Heart className="w-4 h-4 mr-1 text-red-500" />

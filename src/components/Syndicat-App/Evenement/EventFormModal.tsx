@@ -137,43 +137,61 @@ export const EventFormModal: React.FC<EventFormModalProps> = ({
 
     // Validation du formulaire
     const validateForm = (): boolean => {
-        if (!title.trim()) {
-            toast.error(t('erreur_titre_requis', 'Le titre est requis.'));
-            return false;
-        }
-
-        if (!startDate || !endDate) {
-            toast.error(t('erreur_dates_requises', 'Les dates de début et fin sont requises.'));
-            return false;
-        }
-
-        const start = new Date(startDate);
-        const end = new Date(endDate);
+        // Log pour débogage
+        console.log('Validating form with:', { title, description, startDate, endDate, location });
         
-        if (start >= end) {
-            toast.error(t('erreur_date_fin_anterieure_debut', 'La date de fin doit être après le début.'));
+        if (!title.trim()) {
+            toast.error(t('erreur_titre_requis', 'Le titre est requis'));
             return false;
         }
 
-        // Validation que la date n'est pas dans le passé (pour création uniquement)
-        if (!eventToEdit && start < new Date()) {
-            toast.error(t('erreur_date_passee', 'La date de début ne peut pas être dans le passé.'));
+        if (!startDate) {
+            toast.error(t('erreur_date_debut_requise', 'La date de début est requise'));
             return false;
         }
 
+        if (!endDate) {
+            toast.error(t('erreur_date_fin_requise', 'La date de fin est requise'));
+            return false;
+        }
+
+        if (new Date(startDate) > new Date(endDate)) {
+            toast.error(t('erreur_dates_invalides', 'La date de début doit être antérieure à la date de fin'));
+            return false;
+        }
+
+        if (!location.trim()) {
+            toast.error(t('erreur_lieu_requis', 'Le lieu est requis'));
+            return false;
+        }
+        
+        // Log pour débogage
+        console.log('Form validation passed!');
         return true;
     };
 
     // Soumission du formulaire
     const handleSubmitInternal = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        console.log('Form submit triggered');
+        toast.success('Formulaire soumis - début du traitement');
         
-        if (isSubmitting) return;
+        if (isSubmitting) {
+            console.log('Submission already in progress, aborting');
+            toast.error('Soumission déjà en cours, veuillez patienter');
+            return;
+        }
 
-        if (!validateForm()) return;
+        if (!validateForm()) {
+            console.log('Form validation failed');
+            toast.error('Validation du formulaire échouée');
+            return;
+        }
 
+        toast.success('Formulaire validé, préparation des données...');
         const start = new Date(startDate);
         const end = new Date(endDate);
+        console.log('Dates parsed:', { start, end });
 
         // Construction des données selon le type d'envoi souhaité
         if (imageFile) {
@@ -194,6 +212,8 @@ export const EventFormModal: React.FC<EventFormModalProps> = ({
                 formData.append('id', eventToEdit.id.toString());
             }
 
+            console.log('Submitting form with FormData', { hasFile: !!imageFile });
+            toast.success('Envoi du formulaire avec fichier image');
             onSubmit(formData);
         } else {
             // Si pas de fichier, utiliser un objet simple
@@ -210,6 +230,8 @@ export const EventFormModal: React.FC<EventFormModalProps> = ({
                 ...(eventToEdit?.images && { images: eventToEdit.images })
             };
 
+            console.log('Submitting form with event data', eventData);
+            toast.success('Envoi du formulaire sans fichier image');
             onSubmit(eventData);
         }
     };

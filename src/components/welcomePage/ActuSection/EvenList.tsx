@@ -38,6 +38,11 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
           src={event.image || "/placeholder.svg"}
           alt={event.title}
           className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.onerror = null;
+            target.src = "/placeholder.svg";
+          }}
         />
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
           <h2 className="text-2xl font-bold text-white mb-2">{event.title}</h2>

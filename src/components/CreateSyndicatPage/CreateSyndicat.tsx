@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, ChangeEvent, FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ChevronLeft, Upload } from 'lucide-react';
